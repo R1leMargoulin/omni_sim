@@ -1,0 +1,21 @@
+omni_sim_control:
+  ros__parameters:
+    LISTEN_TOPIC_NAME: "cmd_vel"
+    PUBLISH_TOPIC_NAME: '/forward_velocity_controller/commands'
+    MAX_SPEED_X: 3
+    MAX_SPEED_Y: 3
+    MAX_SPEED_W: 2
+    Wheel_center_distance: 0.11176 #0.1016+0.01016)
+    Wheel_radius: 0.0762
+
+motors_control:
+  ros__parameters:
+    DRIVER_A_ADDRESS: 135
+    DRIVER_B_ADDRESS: 128
+    MOT1_COMMAND:  7
+    MOT2_COMMAND:  6
+    ORDER_TOPIC_NAME: '/forward_velocity_controller/commands'
+    MAX_SPEED_MOTOR: 10 
+    MIN_SPEED_MOTOR: -10 
+    motor_drivers_serial_port: "/dev/ttyUSB0"
+    

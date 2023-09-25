@@ -1,0 +1,123 @@
+<!--FRONT LEFT WHEEL-->
+    <joint name="FL_wheel_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="FL_wheel"/>
+        <origin xyz="0.375 0.375 0.0635" rpy="-${pi/2} 0.0 -${pi/4}"/>
+        <axis xyz="0.0 0.0 1."/>
+    </joint>
+    <link name="FL_wheel">
+        <visual>
+            <geometry>
+                <!-- <mesh filename="package://ul_omnibot/description/meshes/omni_wheel.stl"/> -->
+                <cylinder radius="0.1015" length="0.0381"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.1015" length="0.0381"/>
+            </geometry>
+        </collision>
+
+        <xacro:inertial_cylinder mass="2" length="0.0381" radius="0.1015">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        </xacro:inertial_cylinder>
+    </link>
+
+    <!-- Gazebo colors -->
+    <gazebo reference="FL_wheel">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+    <!--FRONT RIGHT WHEEL-->
+    <joint name="FR_wheel_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="FR_wheel"/>
+        <origin xyz="0.375 -0.375 0.0635" rpy="${pi/2} 0.0 ${pi/4}"/>
+        <axis xyz="0.0 0.0 -1."/>
+    </joint>
+    <link name="FR_wheel">
+        <visual>
+            <geometry>
+                <!-- <mesh filename="package://ul_omnibot/description/meshes/omni_wheel.stl"/> -->
+                <cylinder radius="0.1015" length="0.0381"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.1015" length="0.0381"/>
+            </geometry>
+        </collision>
+
+        <xacro:inertial_cylinder mass="2" length="0.0381" radius="0.1015">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        </xacro:inertial_cylinder>
+    </link>
+
+    <!-- Gazebo colors -->
+    <gazebo reference="FR_wheel">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+    <!--BACK LEFT WHEEL-->
+    <joint name="BL_wheel_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="BL_wheel"/>
+        <origin xyz="-0.375 0.375 0.0635" rpy="-${pi/2} 0.0 ${pi/4}"/>
+        <axis xyz="0.0 0.0 1."/>
+    </joint>
+    <link name="BL_wheel">
+        <visual>
+            <geometry>
+                <!-- <mesh filename="package://ul_omnibot/description/meshes/omni_wheel.stl"/> -->
+                <cylinder radius="0.1015" length="0.0381"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.1015" length="0.0381"/>
+            </geometry>
+        </collision>
+
+        <xacro:inertial_cylinder mass="2" length="0.0381" radius="0.1015">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        </xacro:inertial_cylinder>
+    </link>
+
+    <!-- Gazebo colors -->
+    <gazebo reference="BL_wheel">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+    <!--BACK RIGHT WHEEL-->
+    <joint name="BR_wheel_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="BR_wheel"/>
+        <origin xyz="-0.375 -0.375 0.0635" rpy="${pi/2} 0.0 -${pi/4}"/>
+        <axis xyz="0.0 0.0 -1."/>
+    </joint>
+    <link name="BR_wheel">
+        <visual>
+            <geometry>
+                <!-- <mesh filename="package://ul_omnibot/description/meshes/omni_wheel.stl"/> -->
+                <cylinder radius="0.1015" length="0.0381"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.1015" length="0.0381"/>
+            </geometry>
+        </collision>
+
+        <xacro:inertial_cylinder mass="2" length="0.0381" radius="0.1015">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        </xacro:inertial_cylinder>
+    </link>
+
+    <!-- Gazebo colors -->
+    <gazebo reference="BR_wheel">
+        <material>Gazebo/Blue</material>
+    </gazebo>

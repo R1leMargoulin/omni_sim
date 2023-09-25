@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="omni_sim">
+
+        <xacro:include filename="wheels/full_omni_wheel.urdf.xacro"/>
+        <xacro:include filename="wheels/omni_wheel.gazebo.xacro"/>
+        <xacro:include filename="wheels/omni_wheel.transmission.xacro"/>
+        <xacro:include filename="wheels/roller.transmission.xacro"/>
+        <xacro:include filename="wheels/roller.gazebo.xacro"/>
+        <xacro:include filename="inertial_macros.xacro"/>
+
+        <!--materials-->
+        <material name="white">
+            <color rgba="1. 1. 1. 1."/>
+        </material>
+        <material name="red">
+            <color rgba="1 0.2 0.2 1"/>
+        </material>
+        <material name="blue">
+            <color rgba="0.2 0.2 1 1"/>
+        </material>
+        <material name="grey">
+            <color rgba="0.5 0.5 0.5 1."/>
+        </material>
+
+        <!---->
+        <!--BASE-->
+        <link name="base_link">
+        </link>
+
+        <!--CHASSIS-->
+        <joint name="chassis_joint" type="fixed">
+            <parent link="base_link"/>
+            <child link="chassis"/>
+            <origin xyz="-0.1016 0.0 0.0"/>
+        </joint>
+        
+        <link name="chassis">
+
+            <visual>
+                <origin xyz="0.1016 0.0 0.0127"/>
+                <geometry>
+                    <box size="0.2032 0.2032 0.0254"/>
+                </geometry>
+                <material name="white"/>
+            </visual>
+
+            <collision>
+                <origin xyz="0.1016 0.0 0.0127"/>
+                <geometry>
+                    <box size="0.2032 0.2032 0.0254"/>
+                </geometry>
+            </collision>
+
+            <xacro:inertial_box mass="100" x="0.2032" y="0.2032" z="0.0254">
+                <origin xyz="0.1016 0.0 0.0127" rpy="0.0 0.0 0.0"/>
+            </xacro:inertial_box>
+
+        </link>
+        <!-- Gazebo colors -->
+        <gazebo reference="chassis">
+            <material>Gazebo/White</material>
+        </gazebo>
+
+        <!-- Wheels -->
+        <!--FRONT -->
+        <xacro:full_omni_wheel prefix="F" parent="base_link">
+            <origin xyz="${0.1016+0.01016} 0.0 0.0127" rpy="${pi/2} 0.0 ${pi/2}"/>
+            <axis xyz="0.0 0.0 -1."/>
+        </xacro:full_omni_wheel>
+        <!--LEFT -->
+        <xacro:full_omni_wheel prefix="L" parent="base_link">
+            <origin xyz="0.0 ${0.1016+0.01016} 0.0127" rpy="${pi/2} 0.0 ${pi}"/>
+            <axis xyz="0.0 0.0 -1."/>
+        </xacro:full_omni_wheel>
+        <!--BACK/REAR -->
+        <xacro:full_omni_wheel prefix="B" parent="base_link">
+            <origin xyz="-${0.1016+0.01016} 0.0 0.0127" rpy="${pi/2} 0.0 -${pi/2}"/>
+            <axis xyz="0.0 0.0 -1."/>
+        </xacro:full_omni_wheel>
+        <!--RIGHT -->
+        <xacro:full_omni_wheel prefix="R" parent="base_link">
+            <origin xyz="0.0 -${0.1016+0.01016} 0.0127" rpy="${pi/2} 0.0 ${0.0}"/>
+            <axis xyz="0.0 0.0 -1."/>
+        </xacro:full_omni_wheel>
+
+    
+    <!-- GAZEBO -->
+        <gazebo>
+            <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+                <parameters>/home/r1/ros2_ws/src/omni_sim/config/controller.yaml</parameters>
+            </plugin>
+            <plugin name="gazebo_ros_p3d" filename="libgazebo_ros_p3d.so">
+                <!-- Replace camelCase elements with camel_case ones -->
+                <body_name>base_link</body_name>
+                <frame_name>world</frame_name>
+                <update_rate>20</update_rate>
+                <xyz_offset>0 0 0</xyz_offset>
+                <rpy_offset>0.0 0.0 0.0</rpy_offset>
+                <gaussian_noise>0.01</gaussian_noise>
+
+            </plugin>
+        </gazebo>
+    <!-- ROS2 CONTROL -->
+    <ros2_control name="GazeboSystem" type="system">
+        <hardware>
+            <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+        </hardware>
+        <joint name="F_wheel_joint">
+            <command_interface name="velocity">
+            </command_interface>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="L_wheel_joint">
+            <command_interface name="velocity">
+            </command_interface>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="B_wheel_joint">
+            <command_interface name="velocity">
+            </command_interface>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="R_wheel_joint">
+            <command_interface name="velocity">
+            </command_interface>
+            <state_interface name="velocity"/>
+        </joint>
+    </ros2_control>
+</robot>

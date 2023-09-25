@@ -1,0 +1,13 @@
+material UL_material{
+    technique
+    {
+        pass
+        {
+            texture_unit
+            {
+                texture ULL.png
+                scale 1 1
+            }
+        }   
+    }
+}

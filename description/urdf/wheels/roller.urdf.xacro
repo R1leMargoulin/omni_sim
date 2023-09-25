@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  
+  <xacro:macro name="roller_v0" params="prefix parent *joint_origin">
+	<joint name="${prefix}_roller_joint" type="continuous">
+	  <xacro:insert_block name="joint_origin"/>
+	  <parent link="${parent}"/>
+	  <child link="${prefix}_roller_link"/>
+    <axis xyz="1 0 0"/> 
+	</joint>
+
+	<link name="${prefix}_roller_link">
+	  <visual>
+      <geometry>
+        <mesh filename="package://omni_sim/description/meshes/roller.dae"/>
+      </geometry>
+      <material name="white"/>
+	  </visual>
+	  <collision>
+        <max_contacts>10</max_contacts>
+		<geometry>
+		  <mesh filename="package://omni_sim/description/meshes/roller.stl"/>
+		</geometry>
+	  </collision>
+	  <inertial>
+      <origin xyz="0.0 0.0 0.0"/>
+      <mass value="0.009"/>
+      <inertia ixx="0.166667" ixy="0" ixz="0" iyy="0.166667" iyz="0" izz="0.166667"/>
+	  </inertial>
+
+    <surface>
+      <friction>
+          <ode>
+            <mu>1</mu>
+            <mu2>0</mu2>
+            <kp>1e15</kp>
+            <kd>1e13</kd>
+          </ode>
+      </friction>
+    </surface>
+	</link>
+  </xacro:macro>
+  
+</robot>
