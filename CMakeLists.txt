@@ -33,8 +33,6 @@ ament_python_install_package(${PROJECT_NAME})
 # Install Python executables
 install(PROGRAMS
   scripts/control_omni_sim.py
-  scripts/motors_manager_node.py
-  scripts/imu_node.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
